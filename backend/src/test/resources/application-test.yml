@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:standup_test;DB_CLOSE_DELAY=-1;MODE=MySQL;DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=USER
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema-test.sql
+  h2:
+    console:
+      enabled: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+jwt:
+  secret: standup-meeting-tool-jwt-secret-key-2024-must-be-at-least-256-bits-long
+  expiration: 86400000
