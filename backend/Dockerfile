@@ -3,10 +3,4 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 COPY src ./src
-RUN mvn clean package -DskipTests -B
-
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=build /app/target/standup-server-1.0.0.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+RUN mvn clean test -Dspring.profiles.active=test -DfailIfNoTests=false -DskipTests=false -DincludeScope=test -Duser.home=/tmp/maven -B
